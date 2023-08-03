@@ -1,24 +1,58 @@
 <script>
-	import { onMount } from "svelte";
+	import { onMount } from 'svelte';
 
+	let URL = 'https://fakestoreapi.com/products';
+	let promise = fetchData();
 
-    let data;
+	function fetchData() {
+		return fetch(URL).then((data) => data.json());
+	}
 
-    onMount(() => {
-        fetchProducts()
-    })
+	function handleFilter(category) {
+		category === 'all'
+			? (URL = `https://fakestoreapi.com/products`)
+			: (URL = `https://fakestoreapi.com/products/category/${category}`);
 
-    async function fetchProducts(){
-        const res = await fetch('https://fakestoreapi.com/products');
-        data = await res.json();
+		promise = fetchData();
+	}
 
-        console.log(data)
-    }
-    
-
-
+	function resetFilter() {
+		URL = `https://fakestoreapi.com/products/`;
+		promise = fetchData();
+	}
 </script>
 
-<button on:click={() => {
-    fetchProducts()
-}}>filter</button>
+<button
+	on:click={() => {
+		handleFilter();
+	}}>filter</button
+>
+
+<select
+	on:change={(e) => {
+		handleFilter(e.target.value);
+	}}
+>
+	<option value="all">all</option>
+	<option value="jewelery">jewelery</option>
+	<option value="electronics">electronics</option>
+	<option value="men's clothing">"men's clothing</option>
+</select>
+
+<button
+	on:click={() => {
+		resetFilter();
+	}}>reset</button
+>
+
+{#await promise}
+	<p>...waiting</p>
+{:then data}
+	<ul>
+		{#each data as item}
+			<li>{item.title}</li>
+		{/each}
+	</ul>
+{:catch error}
+	<p>An error occurred!</p>
+{/await}

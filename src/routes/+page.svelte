@@ -1,7 +1,7 @@
 <script>
-	import Products from "./Products.svelte";
-
+	import ProductList from './ProductList.svelte';
+	import Products from './Products.svelte';
 </script>
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-<Products/>
+
+<h1>Welcome to Products Store</h1>
+<ProductList />
