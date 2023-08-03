@@ -1,21 +1,18 @@
 <script>
-	import { filterStore, categoryStore} from '../stores';
-
-	
+	import { filterStore, categoryStore } from '../stores';
+	export let finalData;
 
 	$: categories = $categoryStore;
 
-	function handleCategoryChange(e){
-		filterStore.update(filters => {
-			return {...filters, category:e.target.value}
-		})
+	function handleCategoryChange(e) {
+		filterStore.update((filters) => {
+			return { ...filters, category: e.target.value };
+		});
 	}
-
-	
 </script>
 
 <div>
-	<div class="container m-auto py-6" >
+	<div class="container m-auto py-6">
 		<p>{$filterStore.category}</p>
 		<label for="category">
 			Filter by:

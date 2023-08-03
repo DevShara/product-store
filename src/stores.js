@@ -6,17 +6,20 @@ products = await res.json();
 
 const categories = [
 	'All',
-	...new Set(products?.map(item => {
-		return item.category
-	}))
-]
+	...new Set(
+		products?.map((item) => {
+			return item.category;
+		})
+	)
+];
 
-console.log(categories)
+console.log(categories);
 
 export const productStore = writable(products);
 
-export const categoryStore = writable(categories)
+export const categoryStore = writable(categories);
 
+export const filteredProductStore = writable(['asdsd']);
 
 export const filterStore = writable({
 	category: 'All',
