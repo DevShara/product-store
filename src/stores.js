@@ -1,9 +1,24 @@
 import { writable } from 'svelte/store';
 
-let data;
+let products;
 const res = await fetch('https://fakestoreapi.com/products');
-data = await res.json();
+products = await res.json();
 
-const products = data;
+const categories = [
+	'All',
+	...new Set(products?.map(item => {
+		return item.category
+	}))
+]
+
+console.log(categories)
 
 export const productStore = writable(products);
+
+export const categoryStore = writable(categories)
+
+
+export const filterStore = writable({
+	category: 'All',
+	priceRange: { min: 0, max: Infinity }
+});
