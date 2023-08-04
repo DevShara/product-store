@@ -16,39 +16,72 @@
 	} from '$app/navigation';
 
 	export let data;
-	const curPage = $page.params.page;
-	console.log($page.url.pathname);
 
-	function getFilteredProducts(products, filters, pageNo) {
-		console.log(pageNo);
+
+	$: items = data.paginatedProducts
+
+
+
+
+	$: curPage = $page.params.page;
+
+	function handleCLick(){
+		productStore.update((products) => {
+			return [...products]
+		})
+	}
+
+	function getFilteredProducts(products, filters) {
 		return products.filter((product) => {
 			return (filters.category == 'All') | (product.category == filters.category);
 		});
 	}
 
-	productStore.update(() => {
-		return data.paginatedProducts;
-	});
+	// productStore.update(() => {
+	// 	return data.paginatedProducts;
+	// });
 
-	$: products = $productStore;
+
+	// $: products = $productStore;
 	$: filters = $filterStore;
-	$: pageNo = $page.params.page;
 
-	$: filteredProducts = getFilteredProducts(products, filters, pageNo).slice(
+	$: filteredProducts = getFilteredProducts(data.paginatedProducts, filters)
+	
+	$: finalProducts = filteredProducts.slice(
 		(curPage - 1) * 2,
 		curPage * 2
 	);
 
-	afterNavigate(() => {
-		console.log($page.params.page);
-	});
+	let numOfPages, next_page, prev_page;
+
+	$: if(finalProducts){
+		numOfPages =   Math.ceil(filteredProducts.length / 2) ;
+		console.log('numOfPages', numOfPages)
+		 next_page = +curPage < numOfPages ? +curPage + 1 : null;
+		 prev_page = +curPage > 1 ? +curPage - 1 : null;
+	}
+
+
+
+	
+
+	
+
+	
+	
+
+	// console.log('numOfPages', numOfPages)
+
+	
+
+
+
 </script>
 
-<ProductFilter />
-<!-- <ProductList products={filteredProducts} /> -->
+<ProductList products={finalProducts} />
 
-<div class=" container m-auto grid md:grid-cols-4 gap-6 py-12">
-	{#each filteredProducts as product}
+<!-- <div class=" container m-auto grid md:grid-cols-4 gap-6 py-12">
+	{#each finalProducts as product}
 		<Product
 			image={product.image}
 			title={product.title}
@@ -56,12 +89,19 @@
 			description={product.description}
 		/>
 	{/each}
+</div> -->
+
+<div class="container m-auto p-3 flex flex-row gap-12 justify-center">
+	{#if prev_page}
+	<a  class="  bg-cyan-600 py-2 px-3 rounded-md text-white" href={`/products/${prev_page}`}>PREV</a>
+{/if}
+
+
+{#if next_page}
+
+	<a  class="bg-cyan-600 py-2 px-3 rounded-md text-white" href={`/products/${next_page}`}>NEXT</a>
+
+{/if}
 </div>
 
-<div class=" container m-auto py-9">
-	<button
-		on:click={() => {
-			goto('/products/2');
-		}}><a href="/products/2">Next</a></button
-	>
-</div>
+

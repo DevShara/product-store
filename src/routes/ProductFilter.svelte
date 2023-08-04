@@ -1,12 +1,15 @@
 <script>
 	import { filterStore, categoryStore } from '../stores';
-
+	import { goto } from '$app/navigation';
 	$: categories = $categoryStore;
 
 	function handleCategoryChange(e) {
+		console.log('FILTER CHANGE')
 		filterStore.update((filters) => {
 			return { ...filters, category: e.target.value };
 		});
+		goto('/products/1');
+
 	}
 </script>
 

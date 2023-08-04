@@ -1,6 +1,12 @@
+
+
+
 export async function load({ params }) {
 	const res = await fetch('https://fakestoreapi.com/products');
 	let products = await res.json();
+
+	console.log('UPDATEJHADJKF')
+
 
 	const curPage = parseInt(params.page);
 
@@ -8,13 +14,11 @@ export async function load({ params }) {
 
 	const numOfPages = Math.ceil(products.length / 10);
 
-	// console.log('NOP', numOfPages);
+
 
 	const next_page = curPage < numOfPages ? curPage + 1 : null;
 	const prev_page = curPage > 1 ? curPage + 1 : null;
 
-	// console.log(products);
-	// console.log(paginatedProducts);
 
 	const categories = [
 		'All',
@@ -27,6 +31,7 @@ export async function load({ params }) {
 
 	return {
 		paginatedProducts: products,
-		next_page: next_page
+		next_page: next_page,
+	
 	};
 }
