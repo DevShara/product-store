@@ -13,38 +13,32 @@
 	function getFilteredProducts(products, filters) {
 		return products.filter((product) => {
 			const categoryMatch = filters.category === 'All' || product.category === filters.category;
-			const priceMatch = product.price >= filters.priceRange.min && product.price <= filters.priceRange.max;
+			const priceMatch =
+				product.price >= filters.priceRange.min && product.price <= filters.priceRange.max;
 
 			return categoryMatch && priceMatch;
 		});
 	}
 
-	function getSortedProducts(products, sorts){
-		let newProducts = products
-		console.log('products', products)
+	function getSortedProducts(products, sorts) {
+		let newProducts = products;
+		console.log('products', products);
 
-		
-		if(sorts.sortBy === 'Price ASC'){
-			newProducts = [...products].sort((a,b) => {
-				return a.price -b.price
-			})
-		}
-		else if(sorts.sortBy === 'Price DSC'){
-			newProducts = [...products].sort((a,b) => {
-				return b.price - a.price
-			})
-		}
-		else {
+		if (sorts.sortBy === 'Price ASC') {
+			newProducts = [...products].sort((a, b) => {
+				return a.price - b.price;
+			});
+		} else if (sorts.sortBy === 'Price DSC') {
+			newProducts = [...products].sort((a, b) => {
+				return b.price - a.price;
+			});
+		} else {
 			newProducts = [...products].sort((a) => {
-				return a
-			})
+				return a;
+			});
 		}
-
-		
-	
 
 		return newProducts;
-		
 	}
 
 	//Get applied filters from store
@@ -54,19 +48,14 @@
 	//Get filtered products
 	$: filteredProducts = getFilteredProducts(data.products, filters);
 
-	
-
-
-	$: sortedProducts = getSortedProducts(filteredProducts, sorts)
+	$: sortedProducts = getSortedProducts(filteredProducts, sorts);
 
 	$: {
-		console.log(sortedProducts)
+		console.log(sortedProducts);
 	}
 
 	//Get paginated products
 	$: finalProducts = sortedProducts.slice((curPage - 1) * 8, curPage * 8);
-
-
 
 	let numOfPages, next_page, prev_page;
 
@@ -76,9 +65,6 @@
 		next_page = +curPage < numOfPages ? +curPage + 1 : null;
 		prev_page = +curPage > 1 ? +curPage - 1 : null;
 	}
-
-
-
 </script>
 
 <div />
