@@ -11,7 +11,10 @@
 
 	function getFilteredProducts(products, filters) {
 		return products.filter((product) => {
-			return (filters.category == 'All') | (product.category == filters.category);
+			const categoryMatch = filters.category === 'All' || product.category === filters.category;
+			const priceMatch = product.price >= filters.priceRange.min && product.price <= filters.priceRange.max;
+
+			return categoryMatch && priceMatch;
 		});
 	}
 

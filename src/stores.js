@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 
 export const productStore = writable([]);
 
-export const categoryStore = writable(['All', 'jewelery', "men's clothing"]);
+export const categoryStore = writable();
 
 export const filterStore = writable({
 	category: 'All',

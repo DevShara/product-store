@@ -5,7 +5,6 @@ export async function load({ params }) {
 
 	//Derive categories
 	const categories = [
-		'All',
 		...new Set(
 			products?.map((item) => {
 				return item.category;
