@@ -5,7 +5,7 @@
 
 	$: categories = productCategories;
 
-	const sorts = ['Price ASC', 'Price DSC'];
+	const sorts = ['Price low to high', 'Price high to low'];
 
 	function handleGoto(e) {
 		// filterStore.update((filters) => {
@@ -36,7 +36,7 @@
 				bind:value={$filterStore.category}
 				on:change={handleGoto}
 			>
-				<option value="All" selected />
+				<option value="All" selected >All</option>
 
 				{#each categories as category}
 					<option value={category}>{category}</option>
@@ -76,7 +76,7 @@
 		<div class=" w-full md:w-3/12  md:block flex md:text-center   justify-center ">
 			<label for="sort" class="w-1/5 mr-2">Sort by:</label>
 			<select id="sort" class="rounded-md md:w-4/6   w-4/5 " bind:value={$sortStore.sortBy} on:change={handleGoto}>
-				<option value="none" selected />
+				<option value="none" selected >Best match </option>
 
 				{#each sorts as sort}
 					<option value={sort}>{sort}</option>
