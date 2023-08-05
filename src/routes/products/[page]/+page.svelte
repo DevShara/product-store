@@ -6,6 +6,7 @@
 	import ProductFilter from '../../components/ProductFilter.svelte';
 	export let data;
 
+
 	// $: items = data.products
 	$: curPage = $page.params.page;
 
@@ -23,7 +24,6 @@
 	//Sort given products by price
 	function getSortedProducts(products, sorts) {
 		let newProducts = products;
-		console.log('products', products);
 
 		if (sorts.sortBy === 'Price low to high') {
 			newProducts = [...products].sort((a, b) => {
@@ -51,9 +51,6 @@
 
 	$: sortedProducts = getSortedProducts(filteredProducts, sorts);
 
-	$: {
-		console.log(sortedProducts);
-	}
 
 	//Get paginated products
 	$: finalProducts = sortedProducts.slice((curPage - 1) * 10, curPage * 10);
@@ -81,3 +78,5 @@
 <ProductList products={finalProducts} />
 
 <Pagination {prev_page} {next_page} />
+
+

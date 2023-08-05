@@ -12,6 +12,7 @@ export async function load({ params }) {
 		)
 	];
 
+
 	return {
 		products: products,
 		categories: categories
