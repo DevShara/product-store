@@ -10,7 +10,7 @@
 		<img src={image} alt="" class=" max-w-full h-auto" />
 	</div>
 	<div class="p-3">
-		<h3 class="h-2/6 text-lg font-bold">{title.slice(-19)}</h3>
+		<h3 class="h-2/6 text-lg font-bold">{title}</h3>
 		<div class="flex lg:flex-row flex-col gap-3 lg:items-center justify-between mt-3">
 			<p class=" text-md font-bold text-cyan-600">${price}</p>
 			<button

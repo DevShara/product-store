@@ -1,6 +1,6 @@
 export async function load({ params }) {
 	//Fetch data from the API
-	const res = await fetch('https://fakestoreapi.com/products');
+	const res = await fetch('http://127.0.0.1:3000/api');
 	let products = await res.json();
 
 	//Derive categories
@@ -11,7 +11,6 @@ export async function load({ params }) {
 			})
 		)
 	];
-
 
 	return {
 		products: products,

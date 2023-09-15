@@ -6,7 +6,6 @@
 	import ProductFilter from '../../components/ProductFilter.svelte';
 	export let data;
 
-
 	// $: items = data.products
 	$: curPage = $page.params.page;
 
@@ -51,7 +50,6 @@
 
 	$: sortedProducts = getSortedProducts(filteredProducts, sorts);
 
-
 	//Get paginated products
 	$: finalProducts = sortedProducts.slice((curPage - 1) * 10, curPage * 10);
 
@@ -66,11 +64,11 @@
 </script>
 
 <div />
-<ProductFilter productCategories={data.categories} />
+<!-- <ProductFilter productCategories={data.categories} /> -->
 
 <!--Display found items-->
 <div class=" bg-gray-200 py-3">
-	<div class="container m-auto  md:px-0 px-6 ">
+	<div class="container m-auto md:px-0 px-6">
 		<p>{filteredProducts.length} items found</p>
 	</div>
 </div>
@@ -78,5 +76,3 @@
 <ProductList products={finalProducts} />
 
 <Pagination {prev_page} {next_page} />
-
-

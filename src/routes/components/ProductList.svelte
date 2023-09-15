@@ -2,7 +2,6 @@
 	import '../../app.css';
 	import Product from './Product.svelte';
 	export let products;
-
 </script>
 
 <div class=" bg-gray-200">
