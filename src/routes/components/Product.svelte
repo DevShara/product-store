@@ -6,7 +6,7 @@
 </script>
 
 <div class=" lg:p-4 p-3 border-b-8 border-cyan-500 bg-white rounded-br-2xl shadow-xl">
-	<div class=" overflow-hidden h-48">
+	<div class=" overflow-hidden max-h-72 ">
 		<img src={image} alt="" class=" max-w-full h-auto" />
 	</div>
 	<div class="p-3">
